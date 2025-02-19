@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Caesar {
+public class Caesar implements ActionListener {
     private JFrame frame;
     private JTextField keyField,messageField;
+    private JButton encryptButton,decryptButton;
     Caesar(){
         frame = new JFrame("Caesar Şifreleme Uygulaması");
         frame.setSize(400, 300);
@@ -24,12 +27,28 @@ public class Caesar {
         panel2.add(label2);
         panel2.add(messageField);
 
+        JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        encryptButton = new JButton("Şifrele");
+        encryptButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        encryptButton.addActionListener(this);
+        decryptButton = new JButton("Çöz");
+        decryptButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        decryptButton.addActionListener(this);
+        panel3.add(encryptButton);
+        panel3.add(decryptButton);
+
         frame.add(panel1);
         frame.add(panel2);
+        frame.add(panel3);
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
         new Caesar();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
