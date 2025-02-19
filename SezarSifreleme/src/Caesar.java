@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Caesar implements ActionListener {
+    private String SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private JFrame frame;
     private JTextField keyField,messageField,resultField;
     private JButton encryptButton,decryptButton;
@@ -71,8 +72,31 @@ public class Caesar implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "Lütfen bir mesaj girin.", "Hata", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            String result;
+            if (e.getSource() == encryptButton) {
+                result = caesarCipher(message, key, "Şifrele");
+                JOptionPane.showMessageDialog(frame, "Şifreleme başarılı!", "Bilgi", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                result = caesarCipher(message, key, "Çöz");
+                JOptionPane.showMessageDialog(frame, "Çözme başarılı!", "Bilgi", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(frame, "Lütfen geçerli bir anahtar girin.", "Hata", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    public  String caesarCipher(String metin, int anahtar, String islem) {
+        StringBuilder sonuc = new StringBuilder();
+        metin = metin.toUpperCase();
+
+        for (char harf : metin.toCharArray()) {
+            int indeks = SYMBOLS.indexOf(harf);
+            if (indeks != -1) {
+                int yeniIndeks = (islem.equals("Şifrele")) ? (indeks + anahtar) % SYMBOLS.length() : (indeks - anahtar + SYMBOLS.length()) % SYMBOLS.length();
+                sonuc.append(SYMBOLS.charAt(yeniIndeks));
+            } else {
+                sonuc.append(harf);
+            }
+        }
+        return sonuc.toString();
     }
 }
