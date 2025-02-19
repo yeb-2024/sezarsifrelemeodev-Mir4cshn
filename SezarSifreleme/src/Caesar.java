@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Caesar implements ActionListener {
     private JFrame frame;
-    private JTextField keyField,messageField;
+    private JTextField keyField,messageField,resultField;
     private JButton encryptButton,decryptButton;
     Caesar(){
         frame = new JFrame("Caesar Şifreleme Uygulaması");
@@ -37,9 +37,18 @@ public class Caesar implements ActionListener {
         panel3.add(encryptButton);
         panel3.add(decryptButton);
 
+        JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel resultLabel = new JLabel("Sonuç: ");
+        resultLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        resultField = new JTextField(20);
+        resultField.setEditable(false);
+        panel4.add(resultLabel);
+        panel4.add(resultField);
+
         frame.add(panel1);
         frame.add(panel2);
         frame.add(panel3);
+        frame.add(panel4);
         frame.setVisible(true);
     }
 
