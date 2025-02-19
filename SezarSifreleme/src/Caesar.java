@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Caesar implements ActionListener {
-    private String SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private JFrame frame;
     private JTextField keyField,messageField,resultField;
     private JButton encryptButton,decryptButton;
@@ -58,9 +58,7 @@ public class Caesar implements ActionListener {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new Caesar();
-    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -72,6 +70,7 @@ public class Caesar implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "Lütfen bir mesaj girin.", "Hata", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
             String result;
             if (e.getSource() == encryptButton) {
                 result = caesarCipher(message, key, "Şifrele");
@@ -80,11 +79,13 @@ public class Caesar implements ActionListener {
                 result = caesarCipher(message, key, "Çöz");
                 JOptionPane.showMessageDialog(frame, "Çözme başarılı!", "Bilgi", JOptionPane.INFORMATION_MESSAGE);
             }
+            resultField.setText(result);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(frame, "Lütfen geçerli bir anahtar girin.", "Hata", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public  String caesarCipher(String metin, int anahtar, String islem) {
+
+    public static String caesarCipher(String metin, int anahtar, String islem) {
         StringBuilder sonuc = new StringBuilder();
         metin = metin.toUpperCase();
 
@@ -98,5 +99,8 @@ public class Caesar implements ActionListener {
             }
         }
         return sonuc.toString();
+    }
+    public static void main(String[] args) {
+        Caesar caesar = new Caesar();
     }
 }
