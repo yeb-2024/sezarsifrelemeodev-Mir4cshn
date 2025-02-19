@@ -45,10 +45,15 @@ public class Caesar implements ActionListener {
         panel4.add(resultLabel);
         panel4.add(resultField);
 
+
+        JPanel panel5 = new JPanel();
+        panel5.setPreferredSize(new Dimension(400, 20));
+
         frame.add(panel1);
         frame.add(panel2);
         frame.add(panel3);
         frame.add(panel4);
+        frame.add(panel5);
         frame.setVisible(true);
     }
 
@@ -58,6 +63,16 @@ public class Caesar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        try {
+            int key = Integer.parseInt(keyField.getText().trim());
+            String message = messageField.getText().trim();
 
+            if (message.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Lütfen bir mesaj girin.", "Hata", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(frame, "Lütfen geçerli bir anahtar girin.", "Hata", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
